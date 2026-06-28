@@ -2,7 +2,7 @@ import duckdb
 import time
 
 def create_duckdb():
-    duckdb.sql(
+    result = duckdb.sql(
         """
         SELECT
             cidade,
@@ -20,7 +20,11 @@ def create_duckdb():
         ORDER BY
             cidade
         """
-    ).show()
+    )
+    
+    result.show()
+
+    result.write_parquet('data/measurements_summary.parquet')
 
 
 if __name__ == '__main__':
